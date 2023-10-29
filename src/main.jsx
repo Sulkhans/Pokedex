@@ -1,16 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./ErrorPage.jsx";
-import Header from "./components/Header.jsx";
-import App from "./App.jsx";
 import "./index.css";
+import App from "./App.jsx";
+import ErrorPage from "./ErrorPage.jsx";
+import Home from "./components/Home.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Header />,
+    path: "/Pokedex",
+    element: <Home />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+    ],
   },
 ]);
 
