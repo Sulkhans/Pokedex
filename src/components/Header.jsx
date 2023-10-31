@@ -7,13 +7,16 @@ const Header = () => {
   const [menuOn, setMenuOn] = useState(false);
 
   return (
-    <header className="absolute">
-      <div className="w-screen h-11 flex items-center justify-end px-6 text-white bg-[#e3350d]">
+    <header className="fixed">
+      <div className="w-screen h-11 flex items-center justify-end bg-[#e3350d]">
         <Link to="/Pokedex/" className="flex h-8 absolute top-5 left-11">
           <img src={logo} />
-          <h1 className="text-2xl ml-1 tracking-wider">Pokédex</h1>
+          <h1 className="text-2xl ml-1 tracking-wider text-white">Pokédex</h1>
         </Link>
-        <button className="cursor-pointer" onClick={() => setMenuOn(!menuOn)}>
+        <button
+          className="cursor-pointer mr-6"
+          onClick={() => setMenuOn(!menuOn)}
+        >
           <Menu className="h-5 w-5 fill-white" />
         </button>
       </div>

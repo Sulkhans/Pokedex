@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Home from "./components/Home.jsx";
+import Pokemon from "./components/Pokemon";
 
 const router = createBrowserRouter([
   {
@@ -13,12 +14,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "",
+    path: "/Pokedex/Pokemon",
     element: <App />,
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Pokemon />,
+      },
+      {
+        path: "/Pokedex/Pokemon/Items",
       },
     ],
   },
