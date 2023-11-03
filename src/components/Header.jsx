@@ -7,9 +7,9 @@ const Header = () => {
   const [menuOn, setMenuOn] = useState(false);
 
   return (
-    <header className="fixed">
-      <div className="w-screen h-11 flex items-center justify-end bg-[#e3350d]">
-        <Link to="/Pokedex/" className="flex h-8 absolute top-5 left-11">
+    <header className="static">
+      <div className="h-11 flex items-center justify-end bg-[#e3350d]">
+        <Link to="/Pokedex/" className="flex h-8 w-36 absolute top-5 left-11">
           <img src={logo} />
           <h1 className="text-2xl ml-1 tracking-wider text-white">Pokédex</h1>
         </Link>
@@ -29,7 +29,7 @@ const Header = () => {
           }}
         />
         <nav
-          className={`absolute right-0 flex flex-col bg-neutral-200 
+          className={`absolute right-0 flex flex-col bg-neutral-200 z-50
           ${menuOn ? "flex" : "hidden"}`}
         >
           <Link

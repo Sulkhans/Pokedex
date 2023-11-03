@@ -26,34 +26,34 @@ const Home = () => {
         </div>
         <main className="m-7">
           <div className="bg-neutral-300 h-64  rounded-md p-5 shadow-inner shadow-neutral-400">
-            <nav className="h-full p-2 grid grid-rows-2 grid-cols-2 gap-2 shadow-inner bg-gradient-to-b from-cyan-500 to-blue-500 ... font-semibold text-white tracking-wider">
+            <nav className="h-full p-2 grid grid-rows-2 grid-cols-2 gap-2 shadow-inner bg-gradient-to-b from-cyan-400 to-blue-500 ... tracking-wide text-neutral-100 text-lg target">
               <Link
                 to="/Pokedex/Pokemon"
-                className="bg-blue-200 bg-opacity-50 rounded-md flex justify-center items-center transition-all pokeball"
+                className="bg-blue-200 bg-opacity-20 rounded-md flex justify-center items-center transition-all target"
               >
-                <img src={logo} className="absolute opacity-20 w-16" />
-                <h1 className="z-10">Pokemon</h1>
+                <img src={logo} className="absolute opacity-10 w-16 pokeball" />
+                <h1>Pokemon</h1>
               </Link>
               <Link
                 to="/Pokedex/Items"
-                className="bg-blue-200 bg-opacity-50 rounded-md flex justify-center items-center transition-all pokeball"
+                className="bg-blue-200 bg-opacity-20 rounded-md flex justify-center items-center transition-all target"
               >
-                <img src={logo} className="absolute opacity-20 w-16" />
-                <h1 className="z-10">Items</h1>
+                <img src={logo} className="absolute opacity-10 w-16 pokeball" />
+                <h1>Items</h1>
               </Link>
               <Link
                 to="/Pokedex/Moves"
-                className="bg-blue-200 bg-opacity-50 rounded-md flex justify-center items-center transition-all pokeball"
+                className="bg-blue-200 bg-opacity-20 rounded-md flex justify-center items-center transition-all target"
               >
-                <img src={logo} className="absolute opacity-20 w-16" />
-                <h1 className="z-10">Moves</h1>
+                <img src={logo} className="absolute opacity-10 w-16 pokeball" />
+                <h1>Moves</h1>
               </Link>
               <Link
                 to="/Pokedex/Locations"
-                className="bg-blue-200 bg-opacity-50 rounded-md flex justify-center items-center transition-all pokeball"
+                className="bg-blue-200 bg-opacity-20 rounded-md flex justify-center items-center transition-all target"
               >
-                <img src={logo} className="absolute opacity-20 w-16" />
-                <h1 className="z-10">Locations</h1>
+                <img src={logo} className="absolute opacity-10 w-16 pokeball" />
+                <h1>Locations</h1>
               </Link>
             </nav>
           </div>

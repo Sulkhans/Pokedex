@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen pt-[4.5rem]">
+      <div className="min-h-screen ">
         <Outlet />
       </div>
     </>

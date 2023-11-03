@@ -18,11 +18,11 @@
     background-color: #388bc2;
   }
 }
-.pokeball:hover > img {
+.target:hover > .pokeball {
   scale: 1.1;
   animation: pokeball 2s linear infinite;
 }
-.pokeball > img {
+.pokeball {
   transition: all 0.2s linear;
 }
 .color {
