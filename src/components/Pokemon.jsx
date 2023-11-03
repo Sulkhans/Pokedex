@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Search from "../assets/Search.svg?react";
+import Sort from "../assets/Sort.svg?react";
 
 const Pokemon = () => {
   const [data, setData] = useState([]);
@@ -37,26 +38,22 @@ const Pokemon = () => {
 
   return (
     <main className="flex flex-col sm:mx-12">
-      <section className="flex justify-end my-4 sm:mx-12">
-        <button
-          className=""
+      <section className="flex justify-center my-6 sm:mt-0 gap-x-2 sm:justify-end sm:mx-12 ">
+        <Sort
+          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 rotate-180 hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
           onClick={() => setPokemon([...pokemon].sort((a, b) => a.id - b.id))}
-        >
-          asc
-        </button>
-        <button
-          className="border-2 rounded-md"
+        />
+        <Sort
+          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
           onClick={() => setPokemon([...pokemon].sort((a, b) => b.id - a.id))}
-        >
-          desc
-        </button>
+        />
         <div className="relative">
           <Search className="w-5 h-5 absolute right-3 top-[0.8rem] fill-neutral-400 " />
           <input
             value={search}
             onChange={handleSearch}
             placeholder="Search"
-            className="bg-neutral-200 rounded-md p-3 outline-none"
+            className="bg-neutral-200 rounded-md p-3 outline-none hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
             maxLength={15}
           />
         </div>
@@ -85,7 +82,7 @@ const Pokemon = () => {
       <div className="flex justify-center">
         <button
           onClick={handleLoad}
-          className="bg-[#e3350d] text-white text-lg rounded-md tracking-wider px-6 py-2 m-12"
+          className="rounded-md px-6 py-2 m-12 tracking-wide text-white text-lg bg-[#e3350d] hover:bg-[#be2c0b] transition-all"
         >
           Load more
         </button>
