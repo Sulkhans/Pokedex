@@ -27,8 +27,10 @@ const Pokemon = () => {
 
   useEffect(() => {
     setPokemon(
-      data.filter((poke) =>
-        poke.name.toLowerCase().includes(search.toLowerCase())
+      data.filter(
+        (poke) =>
+          poke.name.toLowerCase().includes(search.toLowerCase()) ||
+          poke.id.toString().includes(search)
       )
     );
   }, [search]);
@@ -61,6 +63,7 @@ const Pokemon = () => {
       <section className="flex flex-wrap justify-center gap-6 md:gap-x-10">
         {pokemon.slice(0, num).map((poke) => (
           <Link
+            to={`/Pokedex/Pokemon/${poke.id}`}
             key={poke.id}
             className="p-4 rounded-md hover:scale-105 transition-all bg-gradient-to-b from-white from-50% to-neutral-200 to-95% ... overflow-hidden relative target"
           >
@@ -70,7 +73,7 @@ const Pokemon = () => {
             />
             <img
               src={logo}
-              className="w-32 absolute -bottom-8 -right-10 opacity-20 pokeball"
+              className="w-32 absolute -bottom-8 -right-10 opacity-40 pokeball"
             />
             <h1 className="text-xl relative">{poke.name}</h1>
             <h2 className="text-xs text-neutral-400">

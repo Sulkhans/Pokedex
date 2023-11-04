@@ -5,7 +5,8 @@ import "./index.css";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Home from "./components/Home.jsx";
-import Pokemon from "./components/Pokemon";
+import Pokemon from "./components/Pokemon.jsx";
+import Details from "./components/Details.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
         element: <Pokemon />,
       },
       {
-        path: "/Pokedex/Pokemon/Items",
+        path: "/Pokedex/Pokemon/:id",
+        element: <Details />,
       },
     ],
   },
