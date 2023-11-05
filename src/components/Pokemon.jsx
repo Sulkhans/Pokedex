@@ -17,7 +17,9 @@ const Pokemon = () => {
         const response = json.results.map((poke, index) => ({
           ...poke,
           id: index + 1,
-          name: poke.name.charAt(0).toUpperCase() + poke.name.slice(1),
+          name:
+            poke.name.charAt(0).toUpperCase() +
+            poke.name.slice(1).replace("-", " "),
         }));
         setData(response);
         setPokemon(response);
