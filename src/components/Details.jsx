@@ -108,7 +108,7 @@ const Details = () => {
           </div>
         </div>
         <div className="mt-6 bg-neutral-300 p-4 rounded-md">
-          <h2 className="text-2xl text-center">Base stats</h2>
+          <h2 className="text-2xl text-center mb-2">Base stats</h2>
           <div className="flex text-center justify-evenly mt-4">
             {pokemon.stats &&
               pokemon.stats.map((obj, i) => (
@@ -133,24 +133,28 @@ const Details = () => {
         </div>
       </div>
       {info.varieties && info.varieties.length !== 0 && (
-        <div className="bg-neutral-200">
-          <div className="m-6 p-4 bg-neutral-300 rounded-md">
-            <h1 className="text-2xl text-center">Other forms</h1>
-            {info.varieties.map((item, i) => {
-              const id = item.pokemon.url.slice(-6, -1);
-              return (
-                <Link
-                  to={`/Pokedex/Pokemon/${id}`}
-                  onClick={() => window.scrollTo({ top: 0 })}
-                  key={i}
-                >
-                  <img
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                  />
-                  <h2>{format(item.pokemon.name)}</h2>
-                </Link>
-              );
-            })}
+        <div className="bg-neutral-200 flex flex-col w-full px-6 py-4">
+          <div className="p-4 bg-neutral-300 rounded-md">
+            <h1 className="text-2xl text-center mb-4">Other forms</h1>
+            <div className="flex flex-col gap-4">
+              {info.varieties.map((item, i) => {
+                const id = item.pokemon.url.slice(-6, -1);
+                return (
+                  <Link
+                    key={i}
+                    to={`/Pokedex/Pokemon/${id}`}
+                    onClick={() => window.scrollTo({ top: 0 })}
+                    className="flex flex-col flex-wrap items-center p-4 rounded-md bg-[#bbbbbb] hover:bg-neutral-400 transition-all"
+                  >
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+                      className="w-72"
+                    />
+                    <h2 className="text-xl">{format(item.pokemon.name)}</h2>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
