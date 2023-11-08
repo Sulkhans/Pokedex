@@ -62,7 +62,7 @@ const Pokemon = () => {
           />
         </div>
       </section>
-      <section className="flex flex-wrap justify-center gap-6 md:gap-x-10">
+      <section className="flex flex-wrap justify-center gap-6 md:gap-x-10 2xl:mx-40">
         {pokemon.slice(0, num).map((poke) => (
           <Link
             to={`/Pokedex/Pokemon/${poke.id}`}

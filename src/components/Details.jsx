@@ -18,13 +18,14 @@ const Details = () => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then((res) => res.json())
       .then((json) => {
-        const { abilities, species, sprites, stats, types } = json;
+        const { abilities, species, sprites, stats, types, moves } = json;
         setPokemon({
           abilities,
           species,
           sprites,
           stats,
           types,
+          moves,
           name: format(json.name),
         });
       })
@@ -48,23 +49,25 @@ const Details = () => {
     <main className="flex flex-col sm:items-stretch justify-center items-center mt-4">
       <div className="flex flex-col w-full sm:flex-row sm:p-6 sm:gap-6">
         <div className="relative flex flex-col justify-between bg-gradient-to-b from-white from-50% to-neutral-200 to-95% ... overflow-hidden px-6 w-full sm:rounded-md sm:p-6 lg:w-2/3">
-          <div className="absolute flex gap-4 z-20 left-5 top-0">
-            {id != 1 && (
-              <Link to={`/Pokedex/Pokemon/${Number(id) - 1}`}>
-                <Arrow className="w-9 h-9 rotate-90 bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 rounded-md transition-all" />
-              </Link>
-            )}
-            {id != 1010 && (
-              <Link to={`/Pokedex/Pokemon/${Number(id) + 1}`}>
-                <Arrow className="w-9 h-9 -rotate-90 bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 rounded-md transition-all" />
-              </Link>
-            )}
-          </div>
+          {id < 1010 && (
+            <div className="absolute flex gap-4 z-20 left-5 top-0">
+              {id != 1 && (
+                <Link to={`/Pokedex/Pokemon/${Number(id) - 1}`}>
+                  <Arrow className="w-9 h-9 rotate-90 bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 rounded-md transition-all" />
+                </Link>
+              )}
+              {id != 1010 && (
+                <Link to={`/Pokedex/Pokemon/${Number(id) + 1}`}>
+                  <Arrow className="w-9 h-9 -rotate-90 bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 rounded-md transition-all" />
+                </Link>
+              )}
+            </div>
+          )}
           <button
             className="absolute right-5 top-0 z-20 w-9 h-9 flex justify-center items-center bg-neutral-200 hover:bg-neutral-300 rounded-md transition-all"
             onClick={() => setShiny(!shiny)}
           >
-            <Shiny className="w-6 h-6 fill-yellow-400" />
+            <Shiny className="w-5 h-5 fill-yellow-400" />
           </button>
           <div className="w-80 p-2 z-10 self-center">
             {shiny ? (
@@ -91,14 +94,14 @@ const Details = () => {
         <div className="bg-neutral-200 flex flex-col w-full gap-6 px-6 py-4 justify-center sm:rounded-md">
           <div className="flex gap-2 items-center justify-center bg-neutral-300 p-4 rounded-md">
             {pokemon.types &&
-              pokemon.types.map((obj, i) => (
+              pokemon.types.map((item, i) => (
                 <p
                   className={`${
-                    colors[obj.type.name]
+                    colors[item.type.name]
                   } px-4 py-1 text-lg uppercase rounded-md text-center text-white tracking-wider`}
                   key={i}
                 >
-                  {obj.type.name}
+                  {item.type.name}
                 </p>
               ))}
           </div>
@@ -111,42 +114,58 @@ const Details = () => {
             <h3 className="text-2xl text-center">Abilities</h3>
             <div className="flex flex-col">
               {pokemon.abilities &&
-                pokemon.abilities.map((obj, i) => (
-                  <p
+                pokemon.abilities.map((item, i) => (
+                  <Link
                     key={i}
+                    to={`/Pokedex/Ability/${item.ability.name}`}
                     className={`${
-                      obj.is_hidden && "bg-neutral-400"
-                    } rounded-md text-lg p-2`}
+                      item.is_hidden && "bg-[#c4c4c4]"
+                    } rounded-md text-lg p-2 my-1 hover:bg-neutral-400 transition-all`}
                   >
-                    {format(obj.ability.name)}
-                  </p>
+                    {format(item.ability.name)}
+                  </Link>
                 ))}
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-neutral-200 w-full sm:w-auto sm:mx-6 sm:rounded-md">
-        <div className="bg-neutral-300 m-6 p-4 rounded-md flex flex-col items-center">
+      <div className="bg-neutral-200 w-full sm:w-auto sm:m-6 sm:mt-0 sm:rounded-md sm:flex">
+        <div className="bg-neutral-300 m-6 p-4 rounded-md flex flex-col items-center sm:w-3/5">
           <h2 className="text-2xl text-center my-1">Base stats</h2>
-          <div className="flex text-center mt-4 justify-evenly w-full sm:w-1/2">
+          <div className="flex text-center mt-4 justify-evenly w-full md:w-4/5">
             {pokemon.stats &&
-              pokemon.stats.map((obj, i) => (
+              pokemon.stats.map((item, i) => (
                 <div key={i} className="flex flex-col items-center w-9">
                   <div
-                    className="flex items-end justify-center mb-2 bg-neutral-400"
+                    className="flex items-end justify-center mb-2 bg-[#c4c4c4]"
                     style={{ height: "255px" }}
                   >
                     <div
-                      className="bg-neutral-500"
+                      className="bg-neutral-400"
                       style={{
                         width: "2rem",
-                        height: `${obj.base_stat}px`,
+                        height: `${item.base_stat}px`,
                       }}
                     />
                   </div>
-                  <p>{obj.base_stat}</p>
-                  <p className="text-xs">{format(obj.stat.name)}</p>
+                  <p>{item.base_stat}</p>
+                  <p className="text-xs">{format(item.stat.name)}</p>
                 </div>
+              ))}
+          </div>
+        </div>
+        <div className="bg-neutral-300 m-6 p-4 rounded-md flex flex-col items-center sm:w-2/5 sm:ml-0">
+          <h2 className="text-2xl text-center mt-1">Moves</h2>
+          <div className="flex flex-col text-center mt-4 w-full overflow-y-scroll h-80">
+            {pokemon.moves &&
+              pokemon.moves.map((item, i) => (
+                <Link
+                  key={i}
+                  to={`/Pokedex/Moves/${item.move.name}`}
+                  className="bg-[#c4c4c4] m-2 rounded-md text-lg p-2 hover:bg-neutral-400 transition-all"
+                >
+                  {format(item.move.name)}
+                </Link>
               ))}
           </div>
         </div>
@@ -163,7 +182,7 @@ const Details = () => {
                     key={i}
                     to={`/Pokedex/Pokemon/${id}`}
                     onClick={() => window.scrollTo({ top: 0 })}
-                    className="flex flex-col flex-wrap items-center p-4 m-4 rounded-md bg-[#bbbbbb] hover:bg-neutral-400 transition-all"
+                    className="flex flex-col flex-wrap items-center p-4 m-4 rounded-md bg-[#c4c4c4] hover:bg-neutral-400 transition-all"
                   >
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
