@@ -4,6 +4,7 @@ import { colors } from "../colors.js";
 import Shiny from "../assets/Shiny.svg?react";
 import logo from "../assets/logo.png";
 import Arrow from "../assets/sort.svg?react";
+import Hidden from "../assets/hidden.svg?react";
 
 const Details = () => {
   const { id } = useParams();
@@ -37,9 +38,7 @@ const Details = () => {
         const genera = json.genera.filter(
           (item) => item.language.name === "en"
         );
-        const varieties = json.varieties.filter(
-          (item) => item.is_default === false
-        );
+        const { varieties } = json;
         setInfo({ genera: genera[0], varieties });
       })
       .catch((err) => console.error("Error fetching data:", err));
@@ -67,7 +66,11 @@ const Details = () => {
             className="absolute right-5 top-0 z-20 w-9 h-9 flex justify-center items-center bg-neutral-200 hover:bg-neutral-300 rounded-md transition-all"
             onClick={() => setShiny(!shiny)}
           >
-            <Shiny className="w-5 h-5 fill-yellow-400" />
+            <Shiny
+              className={`w-5 h-5 ${
+                shiny ? "fill-yellow-400" : "fill-neutral-400"
+              }`}
+            />
           </button>
           <div className="w-80 p-2 z-10 self-center">
             {shiny ? (
@@ -120,9 +123,12 @@ const Details = () => {
                     to={`/Pokedex/Ability/${item.ability.name}`}
                     className={`${
                       item.is_hidden && "bg-[#c4c4c4]"
-                    } rounded-md text-lg p-2 my-1 hover:bg-neutral-400 transition-all`}
+                    } rounded-md text-lg p-2 my-1 flex justify-between items-center hover:bg-neutral-400 transition-all`}
                   >
                     {format(item.ability.name)}
+                    {item.is_hidden && (
+                      <Hidden className="w-6 h-6 fill-neutral-500" />
+                    )}
                   </Link>
                 ))}
             </div>
@@ -156,7 +162,7 @@ const Details = () => {
         </div>
         <div className="bg-neutral-300 m-6 p-4 rounded-md flex flex-col items-center sm:w-2/5 sm:ml-0">
           <h2 className="text-2xl text-center mt-1">Moves</h2>
-          <div className="flex flex-col text-center mt-4 w-full overflow-y-scroll h-80">
+          <div className="flex flex-col text-center mt-4 w-full overflow-y-auto h-80">
             {pokemon.moves &&
               pokemon.moves.map((item, i) => (
                 <Link
@@ -176,7 +182,7 @@ const Details = () => {
             <h1 className="text-2xl text-center">Other forms</h1>
             <div className="flex flex-col flex-wrap gap-4 sm:flex-row justify-center">
               {info.varieties.map((item, i) => {
-                const id = item.pokemon.url.slice(-6, -1);
+                const id = item.pokemon.url.replace(/\D/g, "").slice(1);
                 return (
                   <Link
                     key={i}
