@@ -7,7 +7,7 @@ const Ability = () => {
   const [ability, setAbility] = useState({});
 
   const format = (str) =>
-    str.charAt(0).toUpperCase() + str.slice(1).replace("-", " ");
+    str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/ability/${name}`)
