@@ -7,7 +7,7 @@ import ErrorPage from "./ErrorPage.jsx";
 import Home from "./components/Home.jsx";
 import Pokemon from "./components/Pokemon.jsx";
 import Details from "./components/Details.jsx";
-import AbilityList from "./components/AbilityList.jsx";
+import Abilities from "./components/Abilities.jsx";
 import Ability from "./components/Ability.jsx";
 import Moves from "./components/Moves.jsx";
 import Move from "./components/Move.jsx";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AbilityList />,
+        element: <Abilities />,
       },
       {
         path: "/Pokedex/Ability/:name",
