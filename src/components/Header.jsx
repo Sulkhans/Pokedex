@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header className="static">
-      <div className="h-11 flex items-center justify-end bg-[#e3350d]">
+      <div className="h-11 flex items-center justify-end bg-[#be2c0b]">
         <Link to="/Pokedex/" className="flex h-8 w-36 absolute top-5 left-11">
           <img src={logo} />
           <h1 className="text-2xl ml-1 tracking-wider text-white">Pokédex</h1>
@@ -21,10 +21,10 @@ const Header = () => {
         </button>
       </div>
       <div className="flex">
-        <div className="w-56 h-7 bg-[#e3350d]" />
+        <div className="w-56 h-7 bg-[#be2c0b]" />
         <div
           style={{
-            borderLeft: "1.75rem solid #e3350d",
+            borderLeft: "1.75rem solid #be2c0b",
             borderBottom: "1.75rem solid transparent",
           }}
         />
