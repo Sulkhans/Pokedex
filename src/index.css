@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @keyframes pokeball {
+  from {
+    transform: rotate(0deg);
+  }
   to {
     transform: rotate(360deg);
   }
@@ -38,7 +41,7 @@ html {
   background-color: #e5e5e5;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #a3a3a3;
+  background-color: #c0c0c0;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -46,9 +49,9 @@ html {
 }
 ::-webkit-scrollbar-track {
   border-radius: 5px;
-  background-color: #e5e5e5;
+  background-color: #dcdcdc;
 }
 ::-webkit-scrollbar-button,
 ::-webkit-scrollbar-corner {
-  background-color: #e5e5e5;
+  background-color: #dcdcdc;
 }

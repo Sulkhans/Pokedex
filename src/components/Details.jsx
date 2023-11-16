@@ -68,7 +68,7 @@ const Details = () => {
           >
             <Shiny
               className={`w-5 h-5 ${
-                shiny ? "fill-yellow-400" : "fill-neutral-400"
+                shiny ? "fill-amber-400" : "fill-neutral-400"
               }`}
             />
           </button>
@@ -121,13 +121,11 @@ const Details = () => {
                   <Link
                     key={i}
                     to={`/Pokedex/Ability/${item.ability.name}`}
-                    className={`${
-                      item.is_hidden && "bg-[#c4c4c4]"
-                    } rounded-md text-lg p-2 my-1 flex justify-between items-center hover:bg-neutral-400 transition-all`}
+                    className="rounded-md text-lg p-2 my-1 flex justify-between items-center hover:bg-neutral-400 transition-all"
                   >
                     {format(item.ability.name)}
                     {item.is_hidden && (
-                      <Hidden className="w-6 h-6 fill-neutral-500" />
+                      <Hidden className="w-6 h-6 fill-neutral-600" />
                     )}
                   </Link>
                 ))}
@@ -143,11 +141,11 @@ const Details = () => {
               pokemon.stats.map((item, i) => (
                 <div key={i} className="flex flex-col items-center w-9">
                   <div
-                    className="flex items-end justify-center mb-2 bg-[#c4c4c4]"
+                    className="flex items-end justify-center mb-2 rounded-md bg-neutral-400"
                     style={{ height: "255px" }}
                   >
                     <div
-                      className="bg-neutral-400"
+                      className="bg-neutral-500 rounded-md"
                       style={{
                         width: "2rem",
                         height: `${item.base_stat}px`,
@@ -168,7 +166,7 @@ const Details = () => {
                 <Link
                   key={i}
                   to={`/Pokedex/Moves/${item.move.name}`}
-                  className="bg-[#c4c4c4] m-2 rounded-md text-lg p-2 hover:bg-neutral-400 transition-all"
+                  className="bg-neutral-400 m-2 rounded-md text-lg p-2 hover:bg-neutral-500 transition-all"
                 >
                   {format(item.move.name)}
                 </Link>
@@ -178,9 +176,9 @@ const Details = () => {
       </div>
       {info.varieties && info.varieties.length !== 0 && (
         <div className="bg-neutral-200 flex flex-col w-full px-6 py-4 sm:m-6 sm:w-auto sm:rounded-md">
-          <div className="p-4 bg-neutral-300 rounded-md">
-            <h1 className="text-2xl text-center">Other forms</h1>
-            <div className="flex flex-col flex-wrap gap-4 sm:flex-row justify-center">
+          <div className="p-4 rounded-md">
+            <h1 className="text-2xl text-center pb-2">Other forms</h1>
+            <div className="flex flex-col flex-wrap gap-3 sm:flex-row justify-center">
               {info.varieties.map((item, i) => {
                 const id = item.pokemon.url.replace(/\D/g, "").slice(1);
                 return (
@@ -188,7 +186,7 @@ const Details = () => {
                     key={i}
                     to={`/Pokedex/Pokemon/${id}`}
                     onClick={() => window.scrollTo({ top: 0 })}
-                    className="flex flex-col flex-wrap items-center p-4 m-4 rounded-md bg-[#c4c4c4] hover:bg-neutral-400 transition-all"
+                    className="flex flex-col flex-wrap items-center p-4 m-4 rounded-md bg-neutral-300 hover:bg-neutral-400 transition-all"
                   >
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}

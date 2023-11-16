@@ -44,11 +44,11 @@ const Pokemon = () => {
     <main className="flex flex-col sm:mx-12">
       <section className="flex justify-center my-6 sm:mt-0 gap-x-2 sm:justify-end sm:mx-12 ">
         <Sort
-          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 rotate-180 hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
+          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 rotate-180 hover:fill-neutral-600 hover:bg-neutral-300 transition-all cursor-pointer"
           onClick={() => setPokemon([...pokemon].sort((a, b) => a.id - b.id))}
         />
         <Sort
-          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
+          className="h-12 w-12 p-1 rounded-md bg-neutral-200 fill-neutral-400 hover:fill-neutral-600 hover:bg-neutral-300 transition-all cursor-pointer"
           onClick={() => setPokemon([...pokemon].sort((a, b) => b.id - a.id))}
         />
         <div className="relative">
@@ -87,7 +87,7 @@ const Pokemon = () => {
       <div className="flex justify-center">
         <button
           onClick={handleLoad}
-          className="rounded-md px-6 py-2 m-12 tracking-wide text-white text-lg bg-[#e3350d] hover:bg-[#be2c0b] transition-all"
+          className="rounded-md px-6 py-2 m-12 tracking-wide text-[#be2c0b] text-lg border-2 border-[#be2c0b] hover:text-white hover:bg-[#be2c0b] transition-all"
         >
           Load more
         </button>

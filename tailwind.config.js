@@ -6,6 +6,14 @@ export default {
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
       },
+      colors: {
+        neutral: {
+          300: "#dcdcdc",
+          400: "#cecece",
+          500: "#c0c0c0",
+          600: "#737373",
+        },
+      },
     },
   },
   plugins: [],

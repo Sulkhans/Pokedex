@@ -44,10 +44,10 @@ const Ability = () => {
                 to={`/Pokedex/Pokemon/${item.pokemon.url
                   .replace(/\D/g, "")
                   .slice(1)}`}
-                className="bg-[#c4c4c4] rounded-md hover:bg-neutral-400 p-4 relative transition-all"
+                className="bg-neutral-400 rounded-md hover:bg-neutral-500 p-4 relative transition-all"
               >
                 {item.is_hidden && (
-                  <Hidden className="w-6 h-6 absolute right-4 fill-neutral-500" />
+                  <Hidden className="w-6 h-6 absolute right-4 fill-neutral-600" />
                 )}
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.pokemon.url
