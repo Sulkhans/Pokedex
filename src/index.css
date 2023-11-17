@@ -10,17 +10,6 @@
     transform: rotate(360deg);
   }
 }
-@keyframes color {
-  from {
-    background-color: #388bc2;
-  }
-  50% {
-    background-color: #196699;
-  }
-  100% {
-    background-color: #388bc2;
-  }
-}
 .target:hover > .pokeball {
   scale: 1.1;
   animation: pokeball 2s linear infinite;
@@ -28,10 +17,16 @@
 .pokeball {
   transition: all 0.2s linear;
 }
-.color {
-  animation: color 3s linear infinite;
+.scroll-hide {
+  overflow-y: scroll;
 }
-
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+.scroll-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 html {
   scroll-behavior: smooth;
 }

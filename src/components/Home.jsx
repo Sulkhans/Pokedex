@@ -8,7 +8,7 @@ const Home = () => {
       <div className="bg-[#e3350d] h-[32rem] w-80 rounded-md shadow-xl shadow-neutral-500 relative bg-gradient-to-b from-[#e3350d] to-[#be2c0b] ...">
         <div className="bg-[#be2c0b] h-12 rounded-t-md " />
         <div className=" absolute top-4 left-7 flex justify-center items-center w-14 h-14 rounded-full bg-neutral-300">
-          <div className="w-11 h-11 rounded-full color" />
+          <div className="w-11 h-11 rounded-full bg-sky-700" />
         </div>
         <div className="flex gap-2 absolute top-3 left-24">
           <div className="h-3 w-3 rounded-full shadow-inner bg-red-600" />
@@ -25,15 +25,12 @@ const Home = () => {
           />
         </div>
         <main className="m-7">
-          <div className="bg-neutral-200 h-64 rounded-md p-4">
-            <nav className="h-full p-2 flex bg-gradient-to-b from-cyan-400 to-blue-500 ...">
-              <Link
-                to="/Pokedex/Pokemon"
-                className="flex justify-center items-center transition-all target"
-              >
-                <img src={logo} className="p-12 opacity-30 pokeball" />
+          <div className="bg-neutral-300 h-64 rounded-md p-4">
+            <div className="h-full bg-neutral-900 flex justify-center items-center hover:bg-sky-500 transition-all duration-1000">
+              <Link to="/Pokedex/Pokemon" className="target">
+                <img src={logo} className="p-16 opacity-90 pokeball" />
               </Link>
-            </nav>
+            </div>
           </div>
           <div>
             <div className="flex gap-4 mt-4 justify-center">
@@ -42,7 +39,7 @@ const Home = () => {
             </div>
             <div className="flex gap-7">
               <div className="w-11 h-11 rounded-full bg-neutral-900 shadow-xl" />
-              <div className="w-24 rounded-md mt-7 mr-7 bg-green-600 shadow-sm shadow-neutral-600" />
+              <div className="w-24 rounded-md mt-7 mr-7 bg-green-600 shadow-sm" />
               <div className="relative mt-3">
                 <div className="h-16 w-6 bg-neutral-900 rounded-md shadow-xl" />
                 <div className="h-6 w-16 absolute top-5 -left-5 bg-neutral-900 rounded-md" />

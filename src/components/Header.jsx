@@ -11,7 +11,9 @@ const Header = () => {
       <div className="h-11 flex items-center justify-end bg-[#be2c0b]">
         <Link to="/Pokedex/" className="flex h-8 w-36 absolute top-5 left-11">
           <img src={logo} />
-          <h1 className="text-2xl ml-1 tracking-wider text-white">Pokédex</h1>
+          <h1 className="text-2xl ml-1 tracking-wider font-medium text-white">
+            Pokedex
+          </h1>
         </Link>
         <button
           className="cursor-pointer mr-6"

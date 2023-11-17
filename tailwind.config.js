@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans-serif"],
+        sans: ["Poppins", "sans-serif"],
       },
       colors: {
         neutral: {
@@ -13,6 +13,9 @@ export default {
           500: "#c0c0c0",
           600: "#737373",
         },
+      },
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
       },
     },
   },
