@@ -19,7 +19,7 @@ const Header = () => {
           className="cursor-pointer mr-6"
           onClick={() => setMenuOn(!menuOn)}
         >
-          <Menu className="h-5 w-5 fill-white" />
+          <Menu className="h-5 w-5 fill-white hover:fill-neutral-300" />
         </button>
       </div>
       <div className="flex">
@@ -31,24 +31,31 @@ const Header = () => {
           }}
         />
         <nav
-          className={`absolute right-0 flex flex-col bg-neutral-200 z-50
+          className={`absolute right-0 flex flex-col shadow-2xl sm:text-lg bg-neutral-300 text-center z-50
           ${menuOn ? "flex" : "hidden"}`}
+          onClick={() => setMenuOn(false)}
         >
           <Link
             to="/Pokedex/Pokemon"
-            className="px-4 py-3 hover:bg-neutral-300"
+            className="px-6 py-4 hover:bg-neutral-400"
           >
             Pokemon
           </Link>
-          <Link to="/Pokedex/Items" className="px-4 py-3 hover:bg-neutral-300">
+          <Link to="/Poked4x/Item" className="px-6 py-4 hover:bg-neutral-400">
             Items
           </Link>
-          <Link to="/Pokedex/Moves" className="px-4 py-3 hover:bg-neutral-300">
+          <Link
+            to="/Pokedex/Ability"
+            className="px-6 py-4 hover:bg-neutral-400"
+          >
+            Abilities
+          </Link>
+          <Link to="/Pokedex/Move" className="px-6 py-4 hover:bg-neutral-400">
             Moves
           </Link>
           <Link
-            to="/Pokedex/Locations"
-            className="px-4 py-3 hover:bg-neutral-300"
+            to="/Pokedex/Location"
+            className="px-6 py-4 hover:bg-neutral-400"
           >
             Locations
           </Link>

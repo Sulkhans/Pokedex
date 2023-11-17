@@ -11,7 +11,7 @@ const Abilities = () => {
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/ability?limit=363`)
+    fetch(`https://pokeapi.co/api/v2/ability?limit=303`)
       .then((res) => res.json())
       .then((json) => {
         const { results } = json;

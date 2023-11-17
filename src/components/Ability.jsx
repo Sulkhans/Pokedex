@@ -23,17 +23,17 @@ const Ability = () => {
   }, []);
 
   return (
-    <main className="m-4 bg-neutral-200 rounded-md flex flex-col gap-4 p-4">
-      <section className="bg-neutral-300 rounded-md p-4">
+    <main className="rounded-md flex flex-col gap-4 p-4">
+      <section className="bg-neutral-200 rounded-md p-4">
         <h1 className="text-2xl mb-2">Ability</h1>
         <h2 className="text-lg">{format(name)}</h2>
       </section>
-      <section className="bg-neutral-300 rounded-md p-4">
+      <section className="bg-neutral-200 rounded-md p-4">
         <h1 className="text-2xl mb-2">Effect</h1>
         <p className="text-lg">{ability.effect && ability.effect.effect}</p>
       </section>
-      <section className="bg-neutral-300 rounded-md p-4">
-        <h1 className="text-2xl mb-2 text-center">
+      <section className="bg-neutral-200 rounded-md p-4">
+        <h1 className="text-2xl m-2 mb-4 text-center">
           Pokemon with {format(name)}
         </h1>
         <div className="flex flex-wrap gap-4 p-2 justify-center">
@@ -44,7 +44,7 @@ const Ability = () => {
                 to={`/Pokedex/Pokemon/${item.pokemon.url
                   .replace(/\D/g, "")
                   .slice(1)}`}
-                className="bg-neutral-400 rounded-md hover:bg-neutral-500 p-4 relative transition-all"
+                className="bg-neutral-300 rounded-md hover:bg-neutral-400 p-4 relative transition-all"
               >
                 {item.is_hidden && (
                   <Hidden className="w-6 h-6 absolute right-4 fill-neutral-600" />

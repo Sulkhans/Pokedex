@@ -57,7 +57,7 @@ const Pokemon = () => {
             value={search}
             onChange={handleSearch}
             placeholder="Search"
-            className="bg-neutral-200 rounded-md p-3 outline-none hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
+            className="bg-neutral-200 rounded-md w-56 p-3 outline-none hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
             maxLength={15}
           />
         </div>

@@ -20,6 +20,9 @@ const Details = () => {
       .then((res) => res.json())
       .then((json) => {
         const { abilities, species, sprites, stats, types, moves } = json;
+        stats[0].stat.name = "HP";
+        stats[3].stat.name = "Sp.Atk";
+        stats[4].stat.name = "Sp.Def";
         setPokemon({
           abilities,
           species,
@@ -85,7 +88,7 @@ const Details = () => {
           </div>
           <div>
             <h1 className="text-4xl relative z-10">{pokemon.name}</h1>
-            <h3 className="text-neutral-400">
+            <h3 className="text-neutral-600">
               #{id.toString().padStart(4, 0)}
             </h3>
             <img
@@ -175,9 +178,9 @@ const Details = () => {
         </div>
       </div>
       {info.varieties && info.varieties.length !== 0 && (
-        <div className="bg-neutral-200 flex flex-col w-full px-6 py-4 sm:m-6 sm:w-auto sm:rounded-md">
+        <div className="bg-neutral-200 flex flex-col w-full px-6 py-4 sm:m-6 sm:mt-0 sm:w-auto sm:rounded-md">
+          <h1 className="text-2xl text-center pt-2">Other forms</h1>
           <div className="p-4 rounded-md">
-            <h1 className="text-2xl text-center pb-2">Other forms</h1>
             <div className="flex flex-col flex-wrap gap-3 sm:flex-row justify-center">
               {info.varieties.map((item, i) => {
                 const id = item.pokemon.url.replace(/\D/g, "").slice(1);
