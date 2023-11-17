@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/Pokedex/Moves",
+    path: "/Pokedex/Move",
     element: <App />,
     children: [
       {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <Moves />,
       },
       {
-        path: "/Pokedex/Moves/:name",
+        path: "/Pokedex/Move/:name",
         element: <Move />,
       },
     ],
