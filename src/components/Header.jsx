@@ -9,7 +9,10 @@ const Header = () => {
   return (
     <header className="static">
       <div className="h-11 flex items-center justify-end bg-[#be2c0b]">
-        <Link to="/Pokedex/" className="flex h-8 w-36 absolute top-5 left-11">
+        <Link
+          to="/Pokedex/"
+          className="flex h-8 w-36 absolute top-5 left-7 sm:left-10"
+        >
           <img src={logo} />
           <h1 className="text-2xl ml-1 tracking-wider font-medium text-white">
             Pokedex
@@ -23,7 +26,7 @@ const Header = () => {
         </button>
       </div>
       <div className="flex">
-        <div className="w-56 h-7 bg-[#be2c0b]" />
+        <div className="w-48 sm:w-56 h-7 bg-[#be2c0b]" />
         <div
           style={{
             borderLeft: "1.75rem solid #be2c0b",
@@ -41,7 +44,7 @@ const Header = () => {
           >
             Pokemon
           </Link>
-          <Link to="/Poked4x/Item" className="px-6 py-4 hover:bg-neutral-400">
+          <Link to="/Pokedex/Item" className="px-6 py-4 hover:bg-neutral-400">
             Items
           </Link>
           <Link
@@ -52,12 +55,6 @@ const Header = () => {
           </Link>
           <Link to="/Pokedex/Move" className="px-6 py-4 hover:bg-neutral-400">
             Moves
-          </Link>
-          <Link
-            to="/Pokedex/Location"
-            className="px-6 py-4 hover:bg-neutral-400"
-          >
-            Locations
           </Link>
         </nav>
       </div>

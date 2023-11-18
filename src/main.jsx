@@ -11,6 +11,7 @@ import Abilities from "./components/Abilities.jsx";
 import Ability from "./components/Ability.jsx";
 import Moves from "./components/Moves.jsx";
 import Move from "./components/Move.jsx";
+import Items from "./components/Items.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,16 @@ const router = createBrowserRouter([
       {
         path: "/Pokedex/Move/:name",
         element: <Move />,
+      },
+    ],
+  },
+  {
+    path: "/Pokedex/Item",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Items />,
       },
     ],
   },
