@@ -51,7 +51,7 @@ const Moves = () => {
             <Link
               to={`/Pokedex/Move/${item.name}`}
               key={i}
-              className="px-4 py-3 bg-neutral-200 rounded-md text-center hover:bg-neutral-300 transition-all"
+              className="px-4 py-3 bg-neutral-200 rounded-md text-center hover:bg-neutral-300 transition-all overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {format(item.name)}
             </Link>
