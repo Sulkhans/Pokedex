@@ -168,7 +168,7 @@ const Details = () => {
               pokemon.moves.map((item, i) => (
                 <Link
                   key={i}
-                  to={`/Pokedex/Moves/${item.move.name}`}
+                  to={`/Pokedex/Move/${item.move.name}`}
                   className="bg-neutral-400 m-2 rounded-md text-lg p-2 hover:bg-neutral-500 transition-all"
                 >
                   {format(item.move.name)}
