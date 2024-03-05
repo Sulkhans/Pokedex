@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
@@ -14,6 +18,10 @@ import Move from "./components/Move.jsx";
 import Items from "./components/Items.jsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to={"/Pokedex"} />,
+  },
   {
     path: "/Pokedex",
     element: <Home />,
