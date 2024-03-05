@@ -27,15 +27,14 @@ const Move = () => {
   return (
     <main className="rounded-md flex flex-col p-4 gap-4 lg:flex-row">
       <section className="lg:w-1/3">
-        <div className="bg-neutral-200 rounded-md p-6 flex gap-6 text-xl">
+        <div className="bg-neutral-100 rounded-md p-6 flex gap-6 text-xl">
           <div className="grid grid-cols-2 items-center gap-6">
             <h1>Move</h1>
             <p>{format(name)}</p>
             <h1>Type</h1>
             <p
-              className={`${
-                colors[move.type && move.type.name]
-              } px-4 py-1 text-lg uppercase rounded-md text-center text-white tracking-wider`}
+              className={`px-4 py-1 text-lg uppercase rounded-md text-center text-white tracking-wider
+              ${colors[move.type && move.type.name]} `}
             >
               {move.type && move.type.name}
             </p>
@@ -49,7 +48,7 @@ const Move = () => {
             <p>{move.pp}</p>
           </div>
         </div>
-        <div className="bg-neutral-200 rounded-md p-4 mt-4">
+        <div className="bg-neutral-100 rounded-md p-4 mt-4">
           <h1 className="text-2xl mb-2">Effect</h1>
           <p className="text-lg">
             {move.flavor_text && move.flavor_text.flavor_text}
@@ -61,22 +60,22 @@ const Move = () => {
           )}
         </div>
       </section>
-      <section>
-        <div className="bg-neutral-200 rounded-md p-4">
-          <h1 className="text-2xl mb-2 text-center">Learned by Pokemon</h1>
-          <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {move.learned_by_pokemon &&
-              move.learned_by_pokemon.map((item, i) => {
+      {move.learned_by_pokemon?.length > 0 && (
+        <section>
+          <div className="bg-neutral-100 rounded-md p-4">
+            <h1 className="text-2xl mb-2 text-center">Learned by Pokemon</h1>
+            <div className="gap-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5">
+              {move.learned_by_pokemon.map((item, i) => {
                 const id = item.url.replace(/\D/g, "").slice(1);
                 return (
                   <Link
                     key={i}
                     to={`/Pokedex/Pokemon/${id}`}
-                    className="flex items-center px-4 py-3 rounded-md bg-neutral-200 hover:bg-neutral-300 transition-all"
+                    className="flex items-center px-4 py-3 rounded-md bg-neutral-100 hover:bg-neutral-200 transition-all"
                   >
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                      className="w-12"
+                      className="w-10"
                     />
                     <h1 className="indent-3 text-lg overflow-hidden overflow-ellipsis whitespace-nowrap">
                       {format(item.name)}
@@ -84,9 +83,10 @@ const Move = () => {
                   </Link>
                 );
               })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </main>
   );
 };

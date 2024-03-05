@@ -41,7 +41,7 @@ const Moves = () => {
           value={search}
           onChange={handleSearch}
           placeholder="Search"
-          className="bg-neutral-200 w-72 rounded-md p-3 outline-none hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
+          className="bg-neutral-100 w-72 rounded-md p-3 outline-none hover:bg-neutral-200 transition-all"
           maxLength={15}
         />
       </div>
@@ -51,7 +51,7 @@ const Moves = () => {
             <Link
               to={`/Pokedex/Move/${item.name}`}
               key={i}
-              className="px-4 py-3 bg-neutral-200 rounded-md text-center hover:bg-neutral-300 transition-all overflow-hidden overflow-ellipsis whitespace-nowrap"
+              className="px-4 py-3 bg-neutral-100 rounded-md text-center hover:bg-neutral-200 transition-all overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {format(item.name)}
             </Link>

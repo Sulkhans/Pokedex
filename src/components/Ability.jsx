@@ -24,19 +24,19 @@ const Ability = () => {
 
   return (
     <main className="rounded-md flex flex-col gap-4 p-4">
-      <section className="bg-neutral-200 rounded-md p-4">
+      <section className="bg-neutral-100 rounded-md p-4">
         <h1 className="text-2xl mb-2">Ability</h1>
         <h2 className="text-lg">{format(name)}</h2>
       </section>
-      <section className="bg-neutral-200 rounded-md p-4">
+      <section className="bg-neutral-100 rounded-md p-4">
         <h1 className="text-2xl mb-2">Effect</h1>
         <p className="text-lg">{ability.effect && ability.effect.effect}</p>
       </section>
-      <section className="bg-neutral-200 rounded-md p-4">
-        <h1 className="text-2xl m-2 mb-4 text-center">
+      <section className="flex flex-col gap-4 bg-neutral-100 rounded-md p-4">
+        <h1 className="text-2xl leading-6 text-center py-1">
           Pokemon with {format(name)}
         </h1>
-        <div className="flex flex-wrap gap-4 p-2 justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center lg:flex flex-wrap justify-center gap-4">
           {ability.pokemon &&
             ability.pokemon.map((item, i) => (
               <Link
@@ -44,18 +44,18 @@ const Ability = () => {
                 to={`/Pokedex/Pokemon/${item.pokemon.url
                   .replace(/\D/g, "")
                   .slice(1)}`}
-                className="bg-neutral-300 rounded-md hover:bg-neutral-400 p-4 relative transition-all"
+                className="rounded-md bg-neutral-200 bg-opacity-50 hover:scale-105 p-4 relative transition-all"
               >
                 {item.is_hidden && (
-                  <Hidden className="w-6 h-6 absolute right-4 fill-neutral-600" />
+                  <Hidden className="w-6 h-6 absolute right-4 fill-neutral-400 opacity-50" />
                 )}
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.pokemon.url
                     .replace(/\D/g, "")
                     .slice(1)}.png`}
-                  className="w-48"
+                  className="w-40 sm:p-2"
                 />
-                <h1 className="text-center mt-2 text-lg">
+                <h1 className="text-center mt-2 sm:text-lg line-clamp-1">
                   {format(item.pokemon.name)}
                 </h1>
               </Link>

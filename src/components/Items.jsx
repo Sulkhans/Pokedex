@@ -54,7 +54,7 @@ const Items = () => {
           value={search}
           onChange={handleSearch}
           placeholder="Search"
-          className="bg-neutral-200 w-72 rounded-md p-3 outline-none hover:fill-neutral-600 hover:bg-neutral-300 transition-all"
+          className="bg-neutral-100 w-72 rounded-md p-3 outline-none hover:bg-neutral-200 transition-all"
           maxLength={15}
         />
       </div>
@@ -63,7 +63,7 @@ const Items = () => {
           {items.map((item, i) => (
             <h1
               key={i}
-              className="px-4 py-3 bg-neutral-200 rounded-md text-center hover:bg-neutral-300 transition-all cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap"
+              className="px-4 py-3 bg-neutral-100 rounded-md text-center hover:bg-neutral-200 transition-all cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap"
               onClick={() => setTarget(item.name)}
             >
               {format(item.name)}
@@ -73,9 +73,9 @@ const Items = () => {
       </section>
       {target && (
         <section className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-          <div className="bg-neutral-300 rounded-md p-6 flex flex-col gap-4 text-xl shadow-md border-2 border-neutral-600 w-80 sm:w-[36rem]">
+          <div className="bg-neutral-100 rounded-md p-6 flex flex-col gap-4 text-lg shadow-md border-2 border-neutral-300 w-80 sm:w-[36rem]">
             <Close
-              className="absolute w-6 h-6 top-4 right-4 cursor-pointer fill-neutral-600 hover:fill-neutral-700"
+              className="absolute w-6 h-6 top-4 right-4 cursor-pointer fill-neutral-300 hover:fill-neutral-400 transition-all"
               onClick={() => setTarget("")}
             />
             <div className="flex items-center gap-6">
@@ -84,12 +84,9 @@ const Items = () => {
                 <img src={item.sprites.default} className="w-8" />
               )}
             </div>
-            {item.effect_entries && (
-              <p>
-                {item.effect_entries.length != 0 &&
-                  item.effect_entries[0].effect}
-              </p>
-            )}
+            {item.effect_entries &&
+              item.effect_entries.length != 0 &&
+              item.effect_entries[0].effect}
             {item.category && <p>Category: {format(item.category.name)}</p>}
             <p>Price: {item.cost || "-"}</p>
           </div>
