@@ -1,93 +1,116 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { colors } from "../colors.js";
+import Loading from "./Loading";
+import Close from "../assets/Close.svg?react";
 
-const Move = () => {
-  const { name } = useParams();
-  const [move, setMove] = useState({});
-
+const Move = ({ move, setMove }) => {
+  const [details, setDetails] = useState(null);
   const format = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/move/${name}`)
-      .then((res) => res.json())
-      .then((json) => {
-        const flavor_text = json.flavor_text_entries.filter(
-          (item) => item.language.name === "en"
-        );
-        setMove({
-          ...json,
-          flavor_text: flavor_text[flavor_text.length - 1],
-        });
-      })
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
+    if (move) {
+      setDetails(null);
+      fetch(`https://pokeapi.co/api/v2/move/${move}`)
+        .then((res) => res.json())
+        .then(
+          ({
+            name,
+            accuracy,
+            type,
+            power,
+            damage_class,
+            pp,
+            effect_entries,
+            learned_by_pokemon,
+          }) => {
+            const effect =
+              effect_entries.length > 0
+                ? effect_entries.filter(
+                    (item) => item.language.name === "en"
+                  )[0].effect
+                : null;
+            setDetails({
+              name,
+              accuracy,
+              type: type.name,
+              power,
+              class: damage_class.name,
+              pp,
+              effect: effect,
+              pokemon: learned_by_pokemon,
+            });
+          }
+        )
+        .catch((err) => console.error("Error fetching data:", err));
+    }
+  }, [move]);
 
   return (
-    <main className="rounded-md flex flex-col p-4 gap-4 lg:flex-row">
-      <section className="lg:w-1/3">
-        <div className="bg-neutral-100 rounded-md p-6 flex gap-6 text-xl">
-          <div className="grid grid-cols-2 items-center gap-6">
-            <h1>Move</h1>
-            <p>{format(name)}</p>
-            <h1>Type</h1>
-            <p
-              className={`px-4 py-1 text-lg uppercase rounded-md text-center text-white tracking-wider
-              ${colors[move.type && move.type.name]} `}
-            >
-              {move.type && move.type.name}
-            </p>
-            <h1>Power</h1>
-            <p>{move.power || "-"}</p>
-            <h1>Category</h1>
-            <p>{move.damage_class && format(move.damage_class.name)}</p>
-            <h1>Accuracy</h1>
-            <p>{move.accuracy || "-"}</p>
-            <h1>PP</h1>
-            <p>{move.pp}</p>
-          </div>
-        </div>
-        <div className="bg-neutral-100 rounded-md p-4 mt-4">
-          <h1 className="text-2xl mb-2">Effect</h1>
-          <p className="text-lg">
-            {move.flavor_text && move.flavor_text.flavor_text}
-          </p>
-          {move.effect_chance && (
-            <h1 className="mt-2 text-lg">
-              Chance: {move.effect_chance && move.effect_chance}%
-            </h1>
-          )}
-        </div>
-      </section>
-      {move.learned_by_pokemon?.length > 0 && (
-        <section>
-          <div className="bg-neutral-100 rounded-md p-4">
-            <h1 className="text-2xl mb-2 text-center">Learned by Pokemon</h1>
-            <div className="gap-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5">
-              {move.learned_by_pokemon.map((item, i) => {
-                const id = item.url.replace(/\D/g, "").slice(1);
-                return (
-                  <Link
-                    key={i}
-                    to={`/Pokedex/Pokemon/${id}`}
-                    className="flex items-center px-4 py-3 rounded-md bg-neutral-100 hover:bg-neutral-200 transition-all"
+    <div
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-5xl transition-all duration-700 text-neutral-700 font-medium z-30
+      ${!move && "translate-y-full"} `}
+    >
+      <div className="min-h-[7rem] mx-4 p-4 pb-0 lg:m-0 rounded-t-md shadow-xl bg-[#fcfcfc] text-neutral-700 border-2 border-b-0 border-neutral-700">
+        {details ? (
+          <div className="relative">
+            <Close
+              onClick={() => setMove("")}
+              className="w-6 h-6 absolute -right-2 -top-2 fill-neutral-700 cursor-pointer"
+            />
+            <div className="flex flex-col md:flex-row gap-4">
+              <div>
+                <h1 className="text-xl xl:text-2xl mb-4">
+                  {format(details.name)}
+                </h1>
+                <div className="grid grid-cols-2 gap-4 md:mb-2 w-60">
+                  <p>Type</p>
+                  <p
+                    className={`px-4 py-1 text-sm uppercase rounded-md text-center text-white tracking-wider
+                ${colors[details.type]}`}
                   >
-                    <img
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                      className="w-10"
-                    />
-                    <h1 className="indent-3 text-lg overflow-hidden overflow-ellipsis whitespace-nowrap">
-                      {format(item.name)}
-                    </h1>
-                  </Link>
-                );
-              })}
+                    {details.type}
+                  </p>
+                  <p>Power</p>
+                  <p>{details.power || "-"}</p>
+                  <p>Class</p>
+                  <p>{format(details.class)}</p>
+                  <p>Accuracy</p>
+                  <p>{details.accuracy || "-"}</p>
+                  <p>PP</p>
+                  <p>{details.pp}</p>
+                </div>
+              </div>
+              {details.pokemon && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-4 m-auto w-full py-3 max-h-48 md:max-h-80 2xl:max-h-96 overflow-y-auto scroll-hide">
+                  {details.pokemon.map((item, i) => (
+                    <Link
+                      key={i}
+                      to={`/Pokedex/Pokemon/${item.url
+                        .replace(/\D/g, "")
+                        .slice(1)}`}
+                    >
+                      <img
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.url
+                          .replace(/\D/g, "")
+                          .slice(1)}.png`}
+                        className="w-16 xl:w-20 m-auto"
+                      />
+                      <p className="text-center text-sm mt-2 line-clamp-1">
+                        {format(item.name)}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        </section>
-      )}
-    </main>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </div>
   );
 };
 

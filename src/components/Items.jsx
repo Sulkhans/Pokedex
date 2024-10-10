@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+import Loading from "./Loading";
 import Search from "../assets/Search.svg?react";
 import Close from "../assets/Close.svg?react";
 
 const Items = () => {
   const [data, setData] = useState([]);
   const [items, setItems] = useState([]);
+  const [item, setItem] = useState("");
+  const [details, setDetails] = useState(null);
   const [search, setSearch] = useState("");
-  const [target, setTarget] = useState("");
-  const [item, setItem] = useState({});
 
   const format = (str) => {
     if (str.replace(/\d/g, "").length == 2) {
@@ -28,11 +29,24 @@ const Items = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/item/${target}`)
-      .then((res) => res.json())
-      .then((json) => setItem(json))
-      .catch((err) => console.error("Error fetching data:", err));
-  }, [target]);
+    if (item) {
+      setDetails(null);
+      fetch(`https://pokeapi.co/api/v2/item/${item}`)
+        .then((res) => res.json())
+        .then(({ name, category, effect_entries, cost, sprites }) => {
+          const effect =
+            effect_entries.length > 0 ? effect_entries[0].effect : null;
+          setDetails({
+            name,
+            category: category.name,
+            effect: effect,
+            cost,
+            sprite: sprites.default,
+          });
+        })
+        .catch((err) => console.error("Error fetching data:", err));
+    }
+  }, [item]);
 
   useEffect(() => {
     setItems(
@@ -48,50 +62,53 @@ const Items = () => {
 
   return (
     <main className="flex flex-col">
-      <div className="relative self-center mt-6 sm:mr-6 sm:mt-0 sm:self-end">
-        <Search className="w-5 h-5 absolute top-[0.8rem] right-3 fill-neutral-400" />
+      <div className="relative group self-center mt-6 sm:mr-6 sm:mt-0 sm:self-end">
+        <Search className="w-5 h-5 absolute group-hover:fill-neutral-500 right-3 top-[0.8rem] fill-neutral-400 transition-all" />
         <input
           value={search}
           onChange={handleSearch}
           placeholder="Search"
-          className="bg-neutral-100 w-72 rounded-md p-3 outline-none hover:bg-neutral-200 transition-all"
+          className="w-64 p-3 bg-transparent text-neutral-700 group-hover:placeholder:text-neutral-500 font-medium transition-all"
           maxLength={15}
         />
       </div>
-      <section className="m-6 rounded-md">
+      <section className="m-6 text-neutral-700 font-medium">
         <div className="grid grid-cols-2 py-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7">
           {items.map((item, i) => (
-            <h1
+            <p
               key={i}
-              className="px-4 py-3 bg-neutral-100 rounded-md text-center hover:bg-neutral-200 transition-all cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap"
-              onClick={() => setTarget(item.name)}
+              onClick={() => setItem(item.name)}
+              className="p-2 text-center text-sm transition-all cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {format(item.name)}
-            </h1>
+            </p>
           ))}
         </div>
-      </section>
-      {target && (
-        <section className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-          <div className="bg-neutral-100 rounded-md p-6 flex flex-col gap-4 text-lg shadow-md border-2 border-neutral-300 w-80 sm:w-[36rem]">
-            <Close
-              className="absolute w-6 h-6 top-4 right-4 cursor-pointer fill-neutral-300 hover:fill-neutral-400 transition-all"
-              onClick={() => setTarget("")}
-            />
-            <div className="flex items-center gap-6">
-              {item.name && <h1>{format(item.name)}</h1>}
-              {item.sprites && (
-                <img src={item.sprites.default} className="w-8" />
-              )}
-            </div>
-            {item.effect_entries &&
-              item.effect_entries.length != 0 &&
-              item.effect_entries[0].effect}
-            {item.category && <p>Category: {format(item.category.name)}</p>}
-            <p>Price: {item.cost || "-"}</p>
+        <div
+          className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-5xl transition-all duration-700
+          ${!item && "translate-y-full"} `}
+        >
+          <div className="min-h-[7rem] mx-4 p-4 lg:m-0 rounded-t-md shadow-xl bg-[#fcfcfc] text-neutral-700 border-2 border-b-0 border-neutral-700">
+            {details ? (
+              <div className="flex flex-col gap-2 relative">
+                <Close
+                  onClick={() => setItem("")}
+                  className="w-6 h-6 absolute -right-2 -top-2 fill-neutral-700 cursor-pointer"
+                />
+                <div className="flex items-center gap-2">
+                  <h1 className="leading-[30px]">{format(details.name)}</h1>
+                  {details.sprite && <img src={details.sprite} />}
+                </div>
+                <p>Category: {format(details.category)}</p>
+                {details.effect && <p>{details.effect}</p>}
+                {details.cost !== 0 && <p>Price: {details.cost}</p>}
+              </div>
+            ) : (
+              <Loading />
+            )}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </main>
   );
 };

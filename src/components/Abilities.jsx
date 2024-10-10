@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Search from "../assets/Search.svg?react";
+import Ability from "./Ability";
 
 const Abilities = () => {
   const [data, setData] = useState([]);
   const [abilities, setAbilities] = useState([]);
+  const [ability, setAbility] = useState("");
   const [search, setSearch] = useState("");
 
   const format = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/ability?limit=303`)
+    fetch(`https://pokeapi.co/api/v2/ability?limit=307`)
       .then((res) => res.json())
       .then((json) => {
         const { results } = json;
@@ -35,28 +36,29 @@ const Abilities = () => {
 
   return (
     <main className="flex flex-col">
-      <div className="relative self-center mt-6 sm:mr-6 sm:mt-0 sm:self-end">
-        <Search className="w-5 h-5 absolute top-[0.8rem] right-3 fill-neutral-400" />
+      <div className="relative group self-center mt-6 sm:mr-6 sm:mt-0 sm:self-end">
+        <Search className="w-5 h-5 absolute group-hover:fill-neutral-500 right-3 top-[0.8rem] fill-neutral-400 transition-all" />
         <input
           value={search}
           onChange={handleSearch}
           placeholder="Search"
-          className="bg-neutral-100 w-72 rounded-md p-3 outline-none hover:bg-neutral-200 transition-all"
+          className="w-64 p-3 bg-transparent text-neutral-700 group-hover:placeholder:text-neutral-500 font-medium transition-all"
           maxLength={15}
         />
       </div>
-      <section className="m-6 rounded-md">
+      <section className="m-6 text-neutral-700 font-medium">
         <div className="grid grid-cols-2 py-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7">
           {abilities.map((item, i) => (
-            <Link
-              to={`/Pokedex/Ability/${item.name}`}
+            <p
               key={i}
-              className="px-4 py-3 bg-neutral-100 rounded-md text-center hover:bg-neutral-200 transition-all overflow-hidden overflow-ellipsis whitespace-nowrap"
+              onClick={() => setAbility(item.name)}
+              className="p-2 text-center text-sm transition-all cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {format(item.name)}
-            </Link>
+            </p>
           ))}
         </div>
+        <Ability ability={ability} setAbility={setAbility} />
       </section>
     </main>
   );

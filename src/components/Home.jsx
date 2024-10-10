@@ -4,9 +4,9 @@ import logo from "../assets/logo.png";
 
 const Home = () => {
   return (
-    <div className="h-screen flex justify-center items-center bg-neutral-100">
-      <div className="bg-[#e3350d] h-[32rem] w-80 rounded-md shadow-xl shadow-neutral-500 relative bg-gradient-to-b from-[#e3350d] to-[#be2c0b] ...">
-        <div className="bg-[#be2c0b] h-12 rounded-t-md " />
+    <div className="h-[100dvh] flex justify-center items-center bg-neutral-100">
+      <div className="bg-[#e3350d] h-[32rem] w-80 rounded-md shadow-xl shadow-neutral-500 relative bg-gradient-to-b from-[#e3350d] to-[#be2c0b] ... 2xl:scale-125">
+        <div className="bg-[#be2c0b] h-12 rounded-t-md" />
         <div className=" absolute top-4 left-7 flex justify-center items-center w-14 h-14 rounded-full bg-neutral-300">
           <div className="w-11 h-11 rounded-full bg-sky-700" />
         </div>
@@ -26,11 +26,15 @@ const Home = () => {
         </div>
         <main className="m-7">
           <div className="bg-neutral-300 h-64 rounded-md p-4">
-            <div className="h-full bg-neutral-900 flex justify-center items-center hover:bg-sky-500 transition-all duration-1000">
-              <Link to="/Pokedex/Pokemon" className="target">
-                <img src={logo} className="p-16 opacity-90 pokeball" />
-              </Link>
-            </div>
+            <Link
+              to="/Pokedex/Pokemon"
+              className="h-full bg-neutral-900 group flex justify-center items-center hover:bg-sky-500 transition-all duration-700"
+            >
+              <img
+                src={logo}
+                className="w-24 opacity-5 group-hover:opacity-50 transition-all duration-700"
+              />
+            </Link>
           </div>
           <div>
             <div className="flex gap-4 mt-4 justify-center">
