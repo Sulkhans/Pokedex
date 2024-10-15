@@ -7,6 +7,7 @@ const Pokemon = () => {
   const [data, setData] = useState([]);
   const [pokemon, setPokemon] = useState([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [sorted, setSorted] = useState(true);
   const [range, setRange] = useState([0, 1025]);
   const regions = [
@@ -35,9 +36,17 @@ const Pokemon = () => {
         }));
         setData(response);
         setPokemon(response);
+        setRange([0, 1025]);
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [search]);
 
   useEffect(() => {
     const res = data
@@ -50,63 +59,75 @@ const Pokemon = () => {
     setPokemon(
       sorted ? res.sort((a, b) => a.id - b.id) : res.sort((a, b) => b.id - a.id)
     );
-  }, [search, sorted, range]);
+  }, [range, debouncedSearch, sorted]);
 
   return (
-    <main className="flex flex-col gap-4">
-      <section className="flex flex-col gap-4 mx-5 sm:mx-6 mt-6 sm:mt-0">
-        <div className="flex items-center gap-x-4 justify-end select-none">
+    <main>
+      <section>
+        <div className="flex items-center justify-end gap-x-2 pt-8 min-[420px]:pt-2 sm:pr-3 bg-neutral-800 select-none">
           <Sort
-            className="h-5 w-5 fill-neutral-500 -scale-x-100 hover:fill-neutral-700 transition-all cursor-pointer"
+            className="h-5 w-5 fill-neutral-200 -scale-x-100 transition-all cursor-pointer"
             onClick={() => setSorted((prev) => !prev)}
           />
-          <div className="relative group">
-            <Search className="w-5 h-5 absolute group-hover:fill-neutral-700 right-3 top-[0.8rem] fill-neutral-500 transition-all" />
+          <div className="relative">
+            <Search className="w-5 h-5 absolute right-3 top-[0.8rem] fill-neutral-200 transition-all" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search"
-              className="w-40 sm:w-56 p-3 bg-transparent font-medium text-neutral-700 placeholder:text-neutral-500 group-hover:placeholder:text-neutral-700 transition-all placeholder:transition-all"
+              className="w-40 sm:w-56 p-3 bg-transparent text-neutral-200 placeholder:text-neutral-200 group-hover:placeholder:text-neutral-300 transition-all placeholder:transition-all"
               maxLength={15}
             />
           </div>
         </div>
-        <div className="flex gap-2 overflow-x-auto min-[724px]:justify-end text-center text-sm font-medium scroll-hide">
-          {regions.map((region) => (
-            <div
-              key={region.name}
-              onClick={() => setRange(region.range)}
-              className={`p-2 hover:text-neutral-700 transition-all cursor-pointer 
-              ${
-                range[0] === region.range[0] && range[1] === region.range[1]
-                  ? "text-neutral-700 font-semibold"
-                  : "text-neutral-500"
-              }`}
-            >
-              {region.name}
-            </div>
-          ))}
+        <div className="flex bg-neutral-800 md:bg-transparent min-[604px]:justify-end text-center text-sm scroll-hide">
+          <div
+            className="hidden md:block"
+            style={{
+              borderRight: "40px solid #262626",
+              borderBottom: "40px solid transparent",
+            }}
+          />
+          <div className="flex overflow-x-auto bg-neutral-800 pb-1 px-1 sm:px-3">
+            {regions.map((region) => (
+              <button
+                key={region.name}
+                onClick={() => setRange(region.range)}
+                className={`p-2 text-neutral-200 transition-all cursor-pointer
+                ${
+                  (range[0] !== region.range[0] ||
+                    range[1] !== region.range[1]) &&
+                  "opacity-50 hover:opacity-75"
+                }`}
+              >
+                {region.name}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="flex flex-wrap justify-center gap-4 sm:gap-6 sm:mx-10 xl:mx-20">
-        {pokemon.map((poke) => (
-          <Link
-            to={`/Pokedex/Pokemon/${poke.id}`}
-            key={poke.id}
-            className="hover:scale-105 font-medium basis-40 md:basis-44 lg:basis-48 p-4 rounded-md transition-all"
-          >
-            <img
-              loading="lazy"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
-              className="m-auto w-28 mb-2 sm:w-32 md:w-36 lg:w-40"
-              draggable={false}
-            />
-            <h1 className="text-neutral-700 line-clamp-1">{poke.name}</h1>
-            <h2 className="text-xs text-neutral-500">
-              #{poke.id.toString().padStart(4, 0)}
-            </h2>
-          </Link>
-        ))}
+      <section className="flex justify-center mt-2 mb-6">
+        <div className="w-full grid place-items-center sm:gap-y-2 2xl:gap-y-4 grid-cols-2 min-[560px]:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 min-[1700px]:grid-cols-6 min-[350px]:max-w-xs min-[425px]:max-w-sm min-[560px]:max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl min-[1700px]:max-w-[100rem]">
+          {pokemon.map((poke) => (
+            <Link
+              to={`/Pokedex/Pokemon/${poke.id}`}
+              key={poke.id}
+              className="relative min-h-[184px] w-36 sm:w-40 md:w-44 lg:w-48 min-[1700px]:w-52 p-4 text-white hover:scale-105 transition-all"
+            >
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 -z-10 bg-neutral-800 w-full h-1/2 rounded-full transition-all" />
+              <img
+                loading="lazy"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
+                className="m-auto w-full aspect-square"
+                draggable={false}
+              />
+              <h1 className="line-clamp-1 text-center">{poke.name}</h1>
+              <h2 className="text-xs opacity-70 text-center">
+                #{poke.id.toString().padStart(4, 0)}
+              </h2>
+            </Link>
+          ))}
+        </div>
       </section>
     </main>
   );

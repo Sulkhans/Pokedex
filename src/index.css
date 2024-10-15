@@ -4,12 +4,15 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: rgb(252, 252, 252);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 button,
 input {
   outline: none;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
 .scroll-hide::-webkit-scrollbar {
   width: 0px;
