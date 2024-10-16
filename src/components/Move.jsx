@@ -49,10 +49,10 @@ const Move = ({ move, setMove }) => {
 
   return (
     <div
-      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-5xl transition-all duration-700 text-neutral-700 font-medium z-30
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-5xl md:max-h-[270px] transition-all duration-700 text-neutral-700 font-medium z-30
       ${!move && "translate-y-full"} `}
     >
-      <div className="min-h-[7rem] mx-4 p-4 pb-0 lg:m-0 rounded-t-md shadow-xl bg-[#fcfcfc] text-neutral-700 border-2 border-b-0 border-neutral-700">
+      <div className="min-h-[7rem] mx-4 p-4 pb-0 lg:m-0 rounded-t-md bg-white text-neutral-800 border-2 border-b-0 border-neutral-700">
         {details ? (
           <div className="relative">
             <Close
@@ -68,7 +68,7 @@ const Move = ({ move, setMove }) => {
                   <p>Type</p>
                   <p
                     className={`px-4 py-1 text-sm uppercase rounded-md text-center text-white tracking-wider
-                ${colors[details.type]}`}
+                    ${colors[details.type]}`}
                   >
                     {details.type}
                   </p>
