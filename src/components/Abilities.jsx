@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Search from "../assets/Search.svg?react";
+import { abilitiesKeyRanges } from "../data/ranges";
 import Ability from "./Ability";
 
 const Abilities = () => {
@@ -9,33 +10,7 @@ const Abilities = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [range, setRange] = useState([0, 367]);
-  const keyRanges = [
-    { key: "A", range: [0, 15] },
-    { key: "B", range: [15, 29] },
-    { key: "C", range: [29, 52] },
-    { key: "D", range: [52, 72] },
-    { key: "E", range: [72, 80] },
-    { key: "F", range: [80, 98] },
-    { key: "G", range: [98, 112] },
-    { key: "H", range: [112, 128] },
-    { key: "I", range: [128, 145] },
-    { key: "J", range: [145, 147] },
-    { key: "K", range: [147, 149] },
-    { key: "L", range: [149, 163] },
-    { key: "M", range: [163, 188] },
-    { key: "N", range: [188, 195] },
-    { key: "O", range: [195, 202] },
-    { key: "P", range: [202, 231] },
-    { key: "Q", range: [231, 235] },
-    { key: "R", range: [235, 249] },
-    { key: "S", range: [249, 317] },
-    { key: "T", range: [317, 341] },
-    { key: "U", range: [341, 345] },
-    { key: "V", range: [345, 350] },
-    { key: "W", range: [350, 365] },
-    { key: "Z", range: [365, 367] },
-    { key: "All", range: [0, 367] },
-  ];
+
   const format = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
@@ -88,15 +63,9 @@ const Abilities = () => {
           </div>
         </div>
         <div className="flex bg-neutral-800 md:bg-transparent min-[604px]:justify-end text-center text-sm scroll-hide">
-          <div
-            className="hidden md:block"
-            style={{
-              borderRight: "40px solid #262626",
-              borderBottom: "40px solid transparent",
-            }}
-          />
+          <div className="triangle-left hidden md:block" />
           <div className="flex overflow-x-auto bg-neutral-800 pb-1 px-1 sm:px-3">
-            {keyRanges.map((item) => (
+            {abilitiesKeyRanges.map((item) => (
               <button
                 key={item.key}
                 onClick={() => setRange(item.range)}

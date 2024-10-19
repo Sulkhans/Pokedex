@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Move from "./Move.jsx";
 import Search from "../assets/Search.svg?react";
+import { movesKeyRanges } from "../data/ranges.js";
+import Move from "./Move.jsx";
 
 const Moves = () => {
   const [data, setData] = useState([]);
@@ -9,36 +10,6 @@ const Moves = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [range, setRange] = useState([0, 919]);
-  const keyRanges = [
-    { key: "#", range: [0, 1] },
-    { key: "A", range: [1, 46] },
-    { key: "B", range: [46, 107] },
-    { key: "C", range: [107, 162] },
-    { key: "D", range: [162, 214] },
-    { key: "E", range: [214, 241] },
-    { key: "F", range: [241, 305] },
-    { key: "G", range: [305, 337] },
-    { key: "H", range: [337, 382] },
-    { key: "I", range: [382, 407] },
-    { key: "J", range: [407, 412] },
-    { key: "K", range: [412, 417] },
-    { key: "L", range: [417, 447] },
-    { key: "M", range: [447, 526] },
-    { key: "N", range: [526, 541] },
-    { key: "O", range: [541, 553] },
-    { key: "P", range: [553, 614] },
-    { key: "Q", range: [614, 618] },
-    { key: "R", range: [618, 659] },
-    { key: "S", range: [659, 811] },
-    { key: "T", range: [811, 872] },
-    { key: "U", range: [872, 875] },
-    { key: "V", range: [875, 886] },
-    { key: "W", range: [886, 913] },
-    { key: "X", range: [913, 914] },
-    { key: "Y", range: [914, 915] },
-    { key: "Z", range: [915, 919] },
-    { key: "All", range: [0, 919] },
-  ];
 
   const format = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
@@ -92,15 +63,9 @@ const Moves = () => {
           </div>
         </div>
         <div className="flex bg-neutral-800 md:bg-transparent min-[604px]:justify-end text-center text-sm scroll-hide">
-          <div
-            className="hidden md:block"
-            style={{
-              borderRight: "40px solid #262626",
-              borderBottom: "40px solid transparent",
-            }}
-          />
+          <div className="triangle-left hidden md:block" />
           <div className="flex overflow-x-auto bg-neutral-800 pb-1 px-1 sm:px-3">
-            {keyRanges.map((item) => (
+            {movesKeyRanges.map((item) => (
               <button
                 key={item.key}
                 onClick={() => setRange(item.range)}
