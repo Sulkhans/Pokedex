@@ -10,6 +10,14 @@ button,
 input {
   outline: none;
 }
+.triangle-left {
+  border-right: 40px solid #262626;
+  border-bottom: 40px solid transparent;
+}
+.triangle-right {
+  border-left: 40px solid #262626;
+  border-bottom: 40px solid transparent;
+}
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
