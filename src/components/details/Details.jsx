@@ -20,7 +20,7 @@ const Details = () => {
   const cry = () => {
     const cry = new Audio(
       `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
-    ).play();
+    );
     cry.play();
   };
 
@@ -97,7 +97,7 @@ const Details = () => {
         <Loading />
       ) : (
         <>
-          <main className="mx-4 my-2 grid grid-rows-1 lg:grid-cols-3 place-items-center gap-8 lg:landscape:min-h-[calc(100vh-164px)]">
+          <main className="mx-4 my-2 grid grid-rows-1 lg:grid-cols-3 place-items-center gap-8 lg:landscape:min-h-[calc(100vh-164px)] overflow-hidden">
             <Stats
               types={pokemon.types}
               abilities={pokemon.abilities}
