@@ -1,39 +1,59 @@
-
 # Pokédex
-Pokémon database made with Vite React, React router, Tailwind CSS, PokéAPI.
 
-Pokémon is a series of video games developed by Game Freak and published by Nintendo.
+A modern web-based **Pokédex** built with **React** and styled with **Tailwind CSS**. It fetches data from the **PokeAPI** to provide detailed information about all Pokémon up to Generation IX, including their abilities, moves, stats, and more.
+
+## Screenshots
+
+![Laptop screens](./previews/1.png)
+![Mobile Screens](./previews/2.png)
 
 ## Features
-- Gen IX support
-- Base stats
-- Abilities
-- Natures
-- Moves
-- Items
-- Regional forms
 
-
+- Responsive design using Tailwind CSS
+- Complete Pokédex entries up to Generation IX
+- Detailed information for each Pokémon including:
+  - Type(s)
+  - Base stats
+  - Abilities
+  - Moves
+  - Evolution chains
+  - Specie varieties
+- View shiny and regional forms
+- Play pokemon's cry
+- Search functionality by name or Pokédex number
+- Filter Pokémon by Generation
 
 ## API Reference
 
-#### PokeAPI V2
-This is a consumption-only API — only the HTTP GET method is available on resources.
+Project uses the [PokéAPI](https://pokeapi.co/api/v2/) for fetching Pokémon data. This is a consumption-only API — only the HTTP GET method is available on resources. No authentication is required to access it and all resources are fully open and available.
 
-No authentication is required to access this API, and all resources are fully open and available.
-
-```http
-  GET api/v2/{endpoint}
 ```
-Calling any api endpoint without a resource id or name will return a paginated list of available resources for that api. By default, a list 'page' will contain up to 20 resources.
-
-
-```http
-  GET api/v2/pokemon/{id or name}
+  GET https://pokeapi.co/api/v2/{endpoint}
 ```
 
-| Parameter | Type     | Description                                |
-| :-------- | :------- | :----------------------------------------- |
-| `id`      | `integer`| The identifier for this pokémon resource.  |
-| `name`    | `string` | The name for this pokémon resource.        |
+## Getting Started
 
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sulkhans/Pokedex.git
+cd Pokedex
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Run the Project
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open http://localhost:5173 to view it in the browser.
