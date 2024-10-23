@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { colors } from "../colors.js";
+import { colors } from "../data/colors.js";
 import Loading from "./Loading";
 import Close from "../assets/Close.svg?react";
 
 const Move = ({ move, setMove }) => {
-  const [details, setDetails] = useState(null);
+  const [data, setData] = useState(null);
   const format = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
   useEffect(() => {
     if (move) {
-      setDetails(null);
+      setData(null);
       fetch(`https://pokeapi.co/api/v2/move/${move}`)
         .then((res) => res.json())
         .then(
           ({
             name,
-            accuracy,
             type,
             power,
             damage_class,
+            accuracy,
             pp,
-            effect_entries,
+            flavor_text_entries,
             learned_by_pokemon,
           }) => {
             const effect =
-              effect_entries.length > 0
-                ? effect_entries.filter(
+              flavor_text_entries.length > 0
+                ? flavor_text_entries.filter(
                     (item) => item.language.name === "en"
-                  )[0].effect
+                  )[0].flavor_text
                 : null;
-            setDetails({
+            setData({
               name,
               accuracy,
               type: type.name,
@@ -49,42 +49,43 @@ const Move = ({ move, setMove }) => {
 
   return (
     <div
-      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full lg:max-w-5xl md:max-h-[270px] transition-all duration-700 text-neutral-700 font-medium z-30
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full md:max-w-4xl md:max-h-[800px] 2xl:max-w-5xl transition-all duration-700 text-neutral-800 font-medium z-30
       ${!move && "translate-y-full"} `}
     >
-      <div className="min-h-[7rem] mx-4 p-4 pb-0 lg:m-0 rounded-t-md bg-white text-neutral-800 border-2 border-b-0 border-neutral-700">
-        {details ? (
-          <div className="relative">
+      <div className="min-h-[7rem] mx-4 p-4 pb-0 lg:m-0 rounded-t-md bg-white border-2 border-b-0 border-neutral-800">
+        {data ? (
+          <main className="relative">
             <Close
               onClick={() => setMove("")}
-              className="w-6 h-6 absolute -right-2 -top-2 fill-neutral-700 cursor-pointer"
+              className="w-6 h-6 absolute -right-2 -top-2 fill-neutral-800 cursor-pointer"
             />
-            <div className="flex flex-col md:flex-row gap-4">
-              <div>
-                <h1 className="text-xl xl:text-2xl mb-4">
-                  {format(details.name)}
+            <div className="flex flex-col md:flex-row gap-4 md:gap-0">
+              <section className="md:max-w-xs">
+                <h1 className="text-xl xl:text-2xl col-span-2 mb-2">
+                  {format(data.name)}
                 </h1>
-                <div className="grid grid-cols-2 gap-4 md:mb-2 w-60">
+                <p className="col-span-2 mb-2.5">{data.effect}</p>
+                <div className="grid grid-cols-2 gap-4 md:mb-2 w-60 items-center">
                   <p>Type</p>
                   <p
-                    className={`px-4 py-1 text-sm uppercase rounded-md text-center text-white tracking-wider
-                    ${colors[details.type]}`}
+                    className={`px-4 py-1.5 text-sm uppercase rounded-full text-center text-white tracking-wider
+                    ${colors[data.type]}`}
                   >
-                    {details.type}
+                    {data.type}
                   </p>
                   <p>Power</p>
-                  <p>{details.power || "-"}</p>
+                  <p>{data.power || "-"}</p>
                   <p>Class</p>
-                  <p>{format(details.class)}</p>
+                  <p>{format(data.class)}</p>
                   <p>Accuracy</p>
-                  <p>{details.accuracy || "-"}</p>
+                  <p>{data.accuracy || "-"}</p>
                   <p>PP</p>
-                  <p>{details.pp}</p>
+                  <p>{data.pp}</p>
                 </div>
-              </div>
-              {details.pokemon && (
-                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-4 m-auto w-full py-3 max-h-48 md:max-h-80 2xl:max-h-96 overflow-y-auto scroll-hide">
-                  {details.pokemon.map((item, i) => (
+              </section>
+              {data.pokemon && (
+                <section className="grid grid-cols-3 sm:grid-cols-4 2xl:grid-cols-5 gap-4 m-auto w-full py-3 max-h-56 md:max-h-80 2xl:max-h-96 overflow-y-auto scroll-hide select-none">
+                  {data.pokemon.map((item, i) => (
                     <Link
                       key={i}
                       to={`/Pokedex/Pokemon/${item.url
@@ -95,17 +96,19 @@ const Move = ({ move, setMove }) => {
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.url
                           .replace(/\D/g, "")
                           .slice(1)}.png`}
-                        className="w-16 xl:w-20 m-auto"
+                        loading="lazy"
+                        draggable={false}
+                        className="w-16 xl:w-24 m-auto aspect-square"
                       />
                       <p className="text-center text-sm mt-2 line-clamp-1">
                         {format(item.name)}
                       </p>
                     </Link>
                   ))}
-                </div>
+                </section>
               )}
             </div>
-          </div>
+          </main>
         ) : (
           <Loading />
         )}
